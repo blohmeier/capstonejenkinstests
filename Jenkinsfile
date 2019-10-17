@@ -27,7 +27,7 @@ pipeline {
 	'''
       }
     }
-    stage ('Deploy the built image based on the Kubernetes Deployment object described in YAML file if Lint HTML succeeds') {
+    stage ('Deploy using rolling deployment as a Kubernetes Deployment object as described in the YAML file if Lint HTML succeeds') {
       steps {
         sh '''
 	  minikube start
