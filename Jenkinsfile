@@ -1,6 +1,6 @@
 pipeline {
   environment {
-    registry = "blohmeier/capstonejenkinstests"
+    registry = "blohmeier/some-content-nginx"
     registryCredential = 'dockerhub'
   }
   agent any
