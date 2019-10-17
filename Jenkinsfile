@@ -1,4 +1,8 @@
 pipeline {
+  environment {
+    registry = "blohmeier/capstonejenkinstests"
+    registryCredential = 'dockerhub'
+  }
   agent any
   stages {
     stage ('Exit code 0 if Lint HTML succeeds otherwise exit code not 0 ') {
@@ -21,7 +25,7 @@ pipeline {
     stage ('Build from Dockerfile if Lint HTML succeeds') {
       steps {
         sh '''
-	  docker build -t some-content-nginx .
+	  docker build -t blohmeier/some-content-nginx .
 	  docker image ls
 	  docker ps
 	  ls -al@
@@ -37,12 +41,11 @@ pipeline {
 	'''
       }
     }   
-    stage ('Upload built image to AWS if Lint HTML succeeds') {
+    stage ('Upload built image to Dockerhub if Lint of HTML succeeds') {
       steps {
-        withAWS(credentials: 'aws-capstone') {
-          //s3Upload(file:'index.html', bucket:'uniquenameproj4new', path:'static-html-directory/index.html')
-	  s3Upload(file:'some-content-nginx', bucket:'uniquenameproj4new', path:'some-content-nginx')
-        }
+        sh '''
+	  docker push blohmeier/some-content-nginx
+	'''
       }
     }
   }
