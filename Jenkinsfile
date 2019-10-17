@@ -17,7 +17,15 @@ pipeline {
             fi
         '''
       }
-    }  
+    }
+    stage ('Build from Dockerfile if Lint HTML succeeds') {
+      steps {
+        sh '''
+	  docker build . -t blohmeier/capstonejenkinstests
+	  docker image ls
+	'''
+      }
+    }
     stage ('Upload to AWS if Lint HTML succeeds') {
       steps {
         withAWS(credentials: 'aws-capstone') {
