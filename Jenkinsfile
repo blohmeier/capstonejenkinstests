@@ -39,7 +39,8 @@ pipeline {
     stage ('Upload to AWS if Lint HTML succeeds') {
       steps {
         withAWS(credentials: 'aws-capstone') {
-          s3Upload(file:'index.html', bucket:'uniquenameproj4new', path:'index.html')
+          s3Upload(file:'index.html', bucket:'uniquenameproj4new', path:'static-html-directory/index.html')
+	  s3Upload(file:'some-content-nginx', bucket:'uniquenameproj4new', path:'some-content-nginx')
         }
       }
     }
