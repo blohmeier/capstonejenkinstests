@@ -30,6 +30,7 @@ pipeline {
     stage ('Deploy the built image based on the Kubernetes Deployment object described in YAML file') {
       steps {
         sh '''
+	  minikube start
 	  kubectl apply -f deployment.yaml
 	  kubectl describe deployment nginx-deployment
 	'''
