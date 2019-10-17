@@ -32,7 +32,7 @@ pipeline {
 	'''
       }
     }
-    stage ('Deploy using rolling deployment as a Kubernetes Deployment object as described in the YAML file if Lint HTML succeeds') {
+    /*stage ('Deploy using rolling deployment as a Kubernetes Deployment object as described in the YAML file if Lint HTML succeeds') {
       steps {
         sh '''
 	  minikube start
@@ -40,7 +40,7 @@ pipeline {
 	  kubectl describe deployment nginx-deployment
 	'''
       }
-    }   
+    }*/
     stage ('Upload built image to Dockerhub if Lint of HTML succeeds') {
       steps {
         sh '''
