@@ -18,14 +18,23 @@ pipeline {
         '''
       }
     }
-    stage ('Build from Dockerfile if Lint HTML succeeds') {
+    stage ('Build from Dockerfile if Lint HTML succeeds and run') {
       steps {
         sh '''
-	  docker build . -t blohmeier/capstonejenkinstests
+	  docker build -t some-content-nginx .
 	  docker image ls
+	  docker ps
 	'''
       }
     }
+    stage ('Deploy the built image based on the Kubernetes Deployment object described in YAML file')
+      steps {
+        sh '''
+	  kubectl apply -f deployment.yaml
+	  kubectl describe deployment nginx-deployment
+	'''
+      }
+    }   
     stage ('Upload to AWS if Lint HTML succeeds') {
       steps {
         withAWS(credentials: 'aws-capstone') {
