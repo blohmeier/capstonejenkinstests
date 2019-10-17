@@ -27,7 +27,7 @@ pipeline {
 	'''
       }
     }
-    stage ('Deploy the built image based on the Kubernetes Deployment object described in YAML file')
+    stage ('Deploy the built image based on the Kubernetes Deployment object described in YAML file') {
       steps {
         sh '''
 	  kubectl apply -f deployment.yaml
