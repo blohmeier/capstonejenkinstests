@@ -24,6 +24,7 @@ pipeline {
 	  docker build -t some-content-nginx .
 	  docker image ls
 	  docker ps
+	  ls -al@
 	'''
       }
     }
